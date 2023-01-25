@@ -886,32 +886,55 @@ let obj = {
       left: undefined,
       right: Node = {
         data: 'J',
-        left: undefined,
-        right: undefined
+        left: Node = {
+          data: 'K',
+          left: undefined,
+          right: undefined
+        },
+        right: Node = {
+          data: 'L',
+          left: undefined,
+          right: undefined
+        }
       }
     }
   }
 }
 
+// function serpentineTree(node) {
+//   const queue = []
+//   function binarTree(arrnode, level) {
+//     const levelArr = []
+//     level++
+//     if (arrnode.length === 0) { return }
+//     while (arrnode.length) {
+//       const element = arrnode.shift()
+//       queue.push(element.data)
+//       if (element.right) { levelArr.push(element.right) }
+//       if (element.left) { levelArr.push(element.left) }
+//     };
+//     if (level % 2 !== 0) { return binarTree(levelArr, level) }
+//     else { return binarTree(levelArr.reverse(), level) }
+//   }
+//   binarTree([node], 0)
+//   return queue
+// } 
 function serpentineTree(node) {
   const queue = []
   function binarTree(arrnode, level) {
     const levelArr = []
-    level++
-    if (arrnode.length === 0) { return }
+    if (arrnode.length === 0) { return 0 }
     while (arrnode.length) {
       const element = arrnode.shift()
       queue.push(element.data)
       if (element.right) { levelArr.push(element.right) }
       if (element.left) { levelArr.push(element.left) }
     };
-    if (level % 2 !== 0) { return binarTree(levelArr, level) }
-    else { return binarTree(levelArr.reverse(), level) }
+    if (level % 2 == 0) { return binarTree(levelArr, level + 1) }
+    else { return binarTree(levelArr.reverse(), level + 1) }
   }
   binarTree([node], 0)
   return queue
 }
-
 console.log(serpentineTree(obj))
-//['A', 'B', 'C', 'F', 'G', 'D', 'E', 'K', 'I']
-//['A', 'B', 'C', 'F', 'G', 'D', 'E', 'I','K']
+//second ommit
